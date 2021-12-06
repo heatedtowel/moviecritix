@@ -1,101 +1,133 @@
 nav {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  }
-  
-  #navBar {
-    background-color: #7D869C;
-  }
-  
-  #logo {
+}
+
+#navBar {
+    background-color: black;
+    border-bottom: black 3px solid;
+    height: 80px;
+    width: 100%;
+}
+
+input#search {
+    color: white;
+}
+
+#logo {
     color: #2B2D42;
-    padding-left: 5%;;
-  }
-  
-  body {
-    background-color: #2B2D42;
-  }
-  aside {
+}
+
+#logo img {
+    width: 145px;
+    height: auto;
+}
+
+body {
+    background-color: white;
+}
+
+aside {
     margin-top: 40px;
     margin-left: 100px;
     padding-left: 5px;
     padding-right: 130px;
+    float: left;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  /*     background-color: #CCA43B; */
-  }
-  
-  #mainContainer {
+    /*     background-color: #CCA43B; */
+}
+
+#mainContainer {
     display: flex;
     flex-flow: column, wrap;
     align-items: center;
     justify-content: space-between;
-  }
-  
-  #parentGif {
+}
+
+#parentGif {
     transition: transform 1.5s;
     /* display: flex;
     flex-flow: column, wrap;
     justify-content: center;
     align-items: center; */
-  }
-  
-  #insGif {
+}
+
+#insGif {
     padding: 20px;
     padding-right: 50px;
     width: 400px;
-    height: 400px;
-  }
+    height: auto;
+}
 
-  #randomBtn {
-    font-weight: 600;
-    background-color: #CCA43B;
-    border-radius: 5px;
+#randomBtn {
+    font-weight: 700;
+    margin-top: 10px;
+    padding-left: 20px;
+    transition: transform .7s ease-in-out;
+    transform-origin: center center;
+    height: 70px;
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+#randomBtn:hover {
+    transform: rotate(360deg);
+}
+
+#searchBtn {
+    font-size: 30px;
+    text-align: center;
     margin: 5px;
-    margin-right: 10px;
-    transition: background-color 2s, color 2s;
     height: 50px;
-  }
-  
-  #randomBtn:hover {
-    background-color: #2B2D42;
-    color: #CCA43B;
-  }
-  
-  .moreInfoParent {
+    margin-top: 10px;
+    background-color: transparent;
+    color: white;
+    border: none;
+}
+
+.moreInfoParent {
     padding: 10px;
     color: #CCA43B;
-  }
-  
-  .parentGif {
+}
+
+.parentGif {
     display: flex;
     flex-flow: column wrap
-  }
-  
-  #movieInfo {
+}
+
+#movieInfo {
     color: #CCA43B;
     padding: 20px;
-  }
-  
-  #card {
-    width: 150%;
-  }
+}
 
-  footer {
-    background-color: #7D869C;
+#card {
+    width: 350px;
+    height: auto;
+}
+
+footer {
+    background-color: white;
+    bottom: 0;
     height: 5%;
     text-align: center;
-    font-weight: bold;
+    vertical-align: middle;
     position: absolute;
     width: 100%;
     font-size: 20px;
-  }
+}
 
-  @media screen and (max-width: 992px) {
+@media screen and (max-width: 992px) {
     #parentGif {
-      transform: scale(.7)
+        transform: scale(.7)
     }
-  };
+}
 
-  @media screen and (max-width: 768px) {
+;
+@media screen and (max-width: 768px) {
     #parentGif {
-      transform: scale(.5)}
-  };
+        transform: scale(.5)
+    }
+}
+
+;
