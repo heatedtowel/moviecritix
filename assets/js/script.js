@@ -95,6 +95,10 @@ function makeMovieInfo(plot) {
   return `<h5 id='moreInfo'>${plot}</h5>`
 };
 
+document.addEventListener('DOMContentLoaded', function() {
+  var elems = document.querySelectorAll('.sidenav');
+  var instances = M.Sidenav.init(elems);
+});
 
 /* movName.addEventListener('click', input => {
   console.log(input)
