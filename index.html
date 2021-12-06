@@ -4,8 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MRVLdex</title>
 </head>
@@ -13,11 +14,11 @@
 <body>
     <header>
         <nav>
-            <div class="nav-wrapper">
-                <a href="#" class="brand-logo">MovieCritix</a>
+            <div class="nav-wrapper" id="navBar">
+                <a href="#" class="brand-logo" id="logo">MovieCritix</a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
-                    <li><button>Randomize⇅</button></li>
-                    <li><input type="text" placeholder="Search..."></li>
+                    <li><button id="randomBtn">Randomize⇅</button></li>
+                    <li><input id="search" type="text" placeholder="Search..."></li>
                 </ul>
             </div>
         </nav>
@@ -25,24 +26,34 @@
     <Main>
 
     </Main>
-    <aside>
-        <div class="card">
-            <div class="card-image waves-effect waves-block waves-light">
-                <img class="activator" src="https://via.placeholder.com/350">
+    <section id="mainContainer">
+        <aside id="left">
+            <div class="card" id="card">
+                <div class="card-image waves-effect waves-block waves-light">
+                    <img id="poster" class="activator"
+                        src="https://via.placeholder.com/500">
+                </div>
+                <div class="card-content">
+                    <span class="card-title activator grey-text text-darken-4" id="movieTitle">CardTitle
+                        <i class="material-icons right">more_vert</i></span>
+                    <p><a href="#">This is a link</a></p>
+                </div>
+                <div class="card-reveal">
+                    <span class="card-title grey-text text-darken-4" id="moreInfoParent">Card Title<i
+                            class="material-icons right">close</i></span>
+                </div>
             </div>
-            <div class="card-content">
-                <span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
-                <p><a href="#">This is a link</a></p>
-            </div>
-            <div class="card-reveal">
-                <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-                <p>Here is some more information about this product that is only revealed once clicked on.</p>
-            </div>
-        </div>
-
-
-    </aside>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        </aside>
+        <div id="parentGif"></div>
+    </section>
+    <div id="movieInfo"></div>
+    <script src="./assets/js/script.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </body>
 
 </html>
+
+
+
+
