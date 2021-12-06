@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MRVLdex</title>
 </head>
@@ -14,12 +15,12 @@
     <header>
         <nav>
             <div class="nav-wrapper" id="navBar">
-                <a href="#!" class="brand-logo" id="logo">MovieCritix</a>
+                <a href="#!" class="brand-logo center" id="logo"><img src="assets/images/Movie Critix.png" alt="logo"></a>
                 <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">Menu</i></a>
-                <ul class="right hide-on-med-and-down">
-                    <li><button id="randomBtn">Randomize⇅</button></li>
-                    <li><input id="search" type="text" placeholder="Search..."></li>
-                    <li><button id="randomBtn">Search</button></li>
+                <ul class="hide-on-med-and-down">
+                    <li><button id="randomBtn"><i class="large material-icons">autorenew</i></button></li>
+                    <li class="right"><button id="searchBtn"><i class="material-icons">search</i></button></li>
+                    <li class="right"><input id="search" type="text" placeholder="Search..."></li>
                 </ul>
             </div>
         </nav>
@@ -27,7 +28,7 @@
         <ul class="sidenav" id="mobile-demo">
             <li><button id="randomBtn">Randomize⇅</button></li>
             <li><input id="search" type="text" placeholder="Search..."></li>
-            <li><button id="randomBtn">Search</button></li>
+            <li><button id="searchBtn">Search</button></li>
         </ul>
     </header>
     <section id="mainContainer">
