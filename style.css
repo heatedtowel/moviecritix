@@ -8,6 +8,7 @@ nav {
   
   #logo {
     color: #2B2D42;
+    padding-left: 5%;;
   }
   
   body {
@@ -30,6 +31,7 @@ nav {
   }
   
   #parentGif {
+    transition: transform 1.5s;
     /* display: flex;
     flex-flow: column, wrap;
     justify-content: center;
@@ -42,7 +44,7 @@ nav {
     width: 400px;
     height: 400px;
   }
-  
+
   #randomBtn {
     font-weight: 600;
     background-color: #CCA43B;
@@ -50,6 +52,7 @@ nav {
     margin: 5px;
     margin-right: 10px;
     transition: background-color 2s, color 2s;
+    height: 50px;
   }
   
   #randomBtn:hover {
@@ -75,3 +78,24 @@ nav {
   #card {
     width: 150%;
   }
+
+  footer {
+    background-color: #7D869C;
+    height: 5%;
+    text-align: center;
+    font-weight: bold;
+    position: absolute;
+    width: 100%;
+    font-size: 20px;
+  }
+
+  @media screen and (max-width: 992px) {
+    #parentGif {
+      transform: scale(.7)
+    }
+  };
+
+  @media screen and (max-width: 768px) {
+    #parentGif {
+      transform: scale(.5)}
+  };
