@@ -1,11 +1,14 @@
-var movName = 'spider';
-var insGif = document.querySelector('#insGif')
-
-var omdbAPI = '2b938382b69dedd54e33dfae5ada1214'
-var giphAPI = 'nw35KvBZSmb4OKNw51Qur35t2fh1nqob'
-var omdbURL = 'https://gateway.marvel.com/v1/public/characters?name=' + movName + '&apikey=' + omdbAPI
-var giphURL = 'https://api.giphy.com/v1/gifs/search?api_key=' + giphAPI + '&q=' + movName + '&limit=25&offset=0&rating=g&lang=en'
-
+var movName = 'the hangover'
+var parentGif = document.querySelector('#parentGif')
+var poster = document.querySelector('#poster')
+var movieTitle = document.querySelector('#movieTitle')
+var duration = document.querySelector('#duration')
+var movieInfo = document.querySelector('#movieInfo')
+var moreInfo = document.querySelector('#moreInfoParent')
+var omdbKey = 'trilogy'
+var giphKey = 'nw35KvBZSmb4OKNw51Qur35t2fh1nqob'
+var omdbURL = `http://www.omdbapi.com/?apikey=${omdbKey}&t=${movName}`
+var giphURL = `https://api.giphy.com/v1/gifs/search?api_key=${giphKey}&q=${movName}&limit=25&offset=0&rating=g&lang=en`
 
 
 
@@ -15,39 +18,70 @@ init();
 
 
 function init() {
-giphyCall();
+  searchMovie();
 }
 
 
 function giphyCall() {
-fetch(giphURL).then(function (response) {
-  return response.json();
-})
-  .then(function (data) {
-    var i = parseInt(Math.random() * data.data.length);
-      console.log(data.data)
-      gifResult = data.data[i].images.original.url;
-      console.log(gifResult)
-
-      insGif.setAttribute('src', gifResult)
+  fetch(giphURL).then((response) => {
+    return response.json();
   })
-  
-  
-
-return omdbAPI.json 
+    .then((data) => {
+      var html = ''
+      for (var i = 0; i < 4; i++) {
+        var random = parseInt(Math.random() * data.data.length);
+        gifResult = data.data[random].images.original.url;
+        html += makeGif(gifResult)
+      }
+      parentGif.innerHTML = html
+      i++
+    })
 };
 
 function omdbCall() {
-
-  fetch(giphURL).then(function (response) {
+  fetch(omdbURL).then((response) => {
     return response.json();
   })
-    .then(function (data) {
-      for (var item of data.results) {
-  
-      }
+    .then((data) => {
+      var html = ''
+      movieTitle.textContent = `${data.Title} ${data.Runtime}`
+      poster.setAttribute('src', data.Poster)
+      reviews = makeReviews(data);
+      moreInfo.innerHTML = makeMoreInfo(data.Director, data.Actors, data.Genre, data.Rated, data.Released, reviews)
+      movieInfo.innerHTML = makeMovieInfo(data.Plot)
     })
-    
-  
-  return giphAPI.json
-  };
+};
+
+function makeGif(data) {
+  return `<img id="insGif" src="${data}">`
+}
+
+function makeReviews(data) {
+    for (var i = 0; i < data.Ratings.length; i++) {
+      return (data.Ratings[i].Source, data.Ratings[i].Value)
+    }
+}
+
+  function makeMoreInfo(director, actors, genre, rated, released, reviews) {
+    return `<h5>Directed by: ${director}</h5>
+  <h5>Actors: ${actors}</h5>
+  <h5>Genre :${genre}</h5>
+  <h5>Rated: ${rated}</h5>
+  <h5>Year Released: ${released}</h5>
+  <h5>Rated: ${reviews}</h5>`
+}
+
+  function makeMovieInfo(plot) {
+    return `<h5 id='moreInfo'>${plot}</h5>`
+  }
+
+
+  movName.addEventListener('click', input => {
+    console.log(input)
+  })
+
+
+  function searchMovie() {
+    giphyCall();
+    omdbCall();
+  }
