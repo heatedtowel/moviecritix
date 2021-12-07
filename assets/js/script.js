@@ -1,6 +1,10 @@
 var searchEL = document.querySelector('#search')
+var mobSearchEL = document.querySelector('#mobSearch')
+var randomBtnEL = document.querySelector('#randomBtn')
+var mobRandomBtnEL = document.querySelector('#mobRandomBtn')
 var parentGif = document.querySelector('#parentGif')
 var searchBtnEL = document.querySelector('#searchBtn')
+var mobSearchBtnEL = document.querySelector('#mobSearchBtn')
 var poster = document.querySelector('#poster')
 var movieTitle = document.querySelector('#movieTitle')
 var duration = document.querySelector('#duration')
@@ -10,22 +14,23 @@ var moreInfo = document.querySelector('#moreInfoParent')
 var omdbKey = 'trilogy'
 var giphKey = 'nw35KvBZSmb4OKNw51Qur35t2fh1nqob'
 var imdbKey = 'k_brnh9rmg'
+var movName = ''
 
-
-var imdbURL = `https://imdb-api.com/en/API/Top250Movies/${imdbKey}`
-
-function handleSearch() {
-  searchMovie();
+function randomMovie() {
+  imdbCall();
 }
 
-function searchMovie() {
-  /*  imdbCall(); */
-  giphyCall();
-  omdbCall();
+function handleSearch(data) {
+  searchMovie(data);
+}
+
+function searchMovie(data) {
+  giphyCall(data);
+  omdbCall(data);
 }
 
 function giphyCall() {
-  var giphURL = `https://api.giphy.com/v1/gifs/search?api_key=${giphKey}&q=${searchEL.value}&limit=25&offset=0&rating=g&lang=en`
+  var giphURL = `https://api.giphy.com/v1/gifs/search?api_key=${giphKey}&q=${movName}&limit=25&offset=0&rating=g&lang=en`
   fetch(giphURL).then((response) => {
     return response.json();
   })
@@ -42,7 +47,7 @@ function giphyCall() {
 };
 
 function omdbCall() {
-  var omdbURL = `https://www.omdbapi.com/?apikey=${omdbKey}&t=${searchEL.value}`
+  var omdbURL = `https://www.omdbapi.com/?apikey=${omdbKey}&t=${movName}`
   fetch(omdbURL).then((response) => {
     return response.json();
   })
@@ -52,24 +57,23 @@ function omdbCall() {
       poster.setAttribute('src', data.Poster)
       reviews = gatherReviews(data);
       reviewsEL.innerHTML = makeReviews(reviews)
-      /* moreInfo.innerHTML = makeMoreInfo(data.Director, data.Actors, data.Genre, data.Rated, data.Released, reviews) */
+      moreInfo.innerHTML = makeMoreInfo(data.Writer, data.Language, data.Country, data.DVD, data.BoxOffice)
       movieInfo.innerHTML = makeMovieInfo(data.Director, data.Actors, data.Genre, data.Rated, data.Released, data.Awards, data.Plot)
     })
 };
 
-/* function imdbCall() {
+function imdbCall() {
+  var imdbURL = `https://imdb-api.com/en/API/Top250Movies/${imdbKey}`
   fetch(imdbURL).then((response) => {
     return response.json();
   })
     .then((data) => {
       var random = parseInt(Math.random() * data.items.length)
-      console.log(data.items[random])
-      var randomTitle = data.items[random].fullTitle
+      var randomTitle = data.items[random].title
       movName = randomTitle
-      console.log(movName)
+      handleSearch(movName)
     })
-}; */
-
+};
 
 function makeGif(data) {
   return `<img id="insGif" src="${data}">`
@@ -96,15 +100,13 @@ function gatherReviews(data) {
   return reviewData
 }
 
-/* function makeMoreInfo(director, actors, genre, rated, released, reviews) {
-  return `<h5>Directed by: ${director}</h5>
-  <h5>Actors: ${actors}</h5>
-  <h5>Genre :${genre}</h5>
-  <h5>Rated: ${rated}</h5>
-  <h5>Year Released: ${released}</h5>
-  <h5>Rated: ${reviews}</h5>
-  <h5 id='moreInfo'>${plot}</h5>`
-} */
+function makeMoreInfo(writer, language, country, dvd, boxOffice) {
+  return `<h5>Writer: ${writer}</h5>
+  <h5>Language: ${language}</h5>
+  <h5>Country: ${country}</h5>
+  <h5>DVD: ${dvd}</h5>
+  <h5>Boxoffice: ${boxOffice}</h5>`
+}
 
 function makeMovieInfo(director, actors, genre, rated, released, awards, plot) {
   return `<h5>Directed by: ${director}</h5>
@@ -116,17 +118,27 @@ function makeMovieInfo(director, actors, genre, rated, released, awards, plot) {
   <h5 id='moreInfo'>${plot}</h5>`
 };
 
-
 document.addEventListener('DOMContentLoaded', function () {
   var elems = document.querySelectorAll('.sidenav');
   var instances = M.Sidenav.init(elems);
 });
 
-
-
 searchBtnEL.addEventListener('click', input => {
   movName = searchEL.value
   handleSearch()
-
-  console.log(movName)
 });
+
+mobSearchBtnEL.addEventListener('click', input => {
+  movName = mobSearchEL.value
+  handleSearch()
+});
+
+randomBtnEL.addEventListener('click', input => {
+  randomMovie();
+});
+
+mobRandomBtnEL.addEventListener('click', input => {
+  randomMovie();
+});
+
+randomMovie()
