@@ -141,4 +141,4 @@ mobRandomBtnEL.addEventListener('click', input => {
   randomMovie();
 });
 
-randomMovie()
+/* randomMovie() */
