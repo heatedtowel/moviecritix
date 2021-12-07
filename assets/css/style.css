@@ -1,12 +1,116 @@
 nav {
+    margin-bottom: 45px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
-aside {
-    margin-right: 20px;
-    padding: 20px;
-    clear: both;
-    float: left;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    background-color: #2589bd;
+#navBar {
+    background-color: black;
+    border-bottom: black 3px solid;
+    height: 80px;
+    width: 100%;
 }
+
+input#search {
+    color: white;
+}
+
+#logo {
+    color: #2B2D42;
+}
+
+#logo img {
+    width: 145px;
+    height: auto;
+}
+
+body {
+    background-color: white;
+}
+
+aside {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+#hero-left {
+    display: flex;
+    justify-content: center;
+}
+
+#parentGif {
+    display: flex;
+    transition: transform 1.5s;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+#insGif {
+    padding: 5px;
+    flex-shrink: 1;
+}
+
+#randomBtn {
+    font-weight: 700;
+    transition: all 0.3s ease-in-out;
+    transform-origin: center;
+    height: 64px;
+    width: 64px;
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+#randomBtn:hover {
+    transform: rotate(360deg);
+    transform-origin: center;
+}
+
+#searchBtn {
+    font-size: 30px;
+    text-align: center;
+    margin: 5px;
+    height: 50px;
+    margin-top: 10px;
+    background-color: transparent;
+    color: white;
+    border: none;
+}
+
+.moreInfoParent {
+    padding: 10px;
+    color: #CCA43B;
+}
+
+#movieInfo {
+    margin-right: 25px;
+}
+
+#card {
+    width: 80%;
+    height: auto;
+}
+
+footer {
+    background-color: white;
+    bottom: 0;
+    height: 50px;
+    margin-top: 5px;
+    text-align: center;
+    width: 100%;
+    font-size: 20px;
+}
+
+@media screen and (max-width: 992px) {
+    #parentGif {
+        transform: scale(.7)
+    }
+}
+
+;
+@media screen and (max-width: 768px) {
+    #parentGif {
+        transform: scale(.5)
+    }
+}
+
+;
