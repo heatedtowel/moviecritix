@@ -32,6 +32,10 @@ aside {
     /*     background-color: #CCA43B; */
 }
 
+#hero-left {
+    display: flex;
+    justify-content: center;
+}
 
 /* #mainContainer {
     display: flex;
@@ -41,21 +45,20 @@ aside {
 } */
 
 #parentGif {
+    display: flex;
     transition: transform 1.5s;
+    justify-content: space-around;
+    flex-wrap: wrap;
     /* display: flex;
     flex-flow: column, wrap;
     justify-content: center;
     align-items: center; */
 }
 
-
-/* 
 #insGif {
-    padding: 20px;
-    padding-right: 50px;
-    width: 400px;
-    height: auto;
-} */
+    padding: 5px;
+    flex-shrink: 1;
+}
 
 #randomBtn {
     font-weight: 700;
@@ -97,11 +100,11 @@ aside {
 } */
 
 #movieInfo {
-    color: black;
+    margin-right: 25px;
 }
 
 #card {
-    width: 100%;
+    width: 80%;
     height: auto;
     /* align-self: flex-start; */
 }
