@@ -1,20 +1,27 @@
 var searchEL = document.querySelector('#search')
 var mobSearchEL = document.querySelector('#mobSearch')
-var randomBtnEL = document.querySelector('#randomBtn')
-var mobRandomBtnEL = document.querySelector('#mobRandomBtn')
-var parentGif = document.querySelector('#parentGif')
 var searchBtnEL = document.querySelector('#searchBtn')
 var mobSearchBtnEL = document.querySelector('#mobSearchBtn')
-var poster = document.querySelector('#poster')
-var movieTitle = document.querySelector('#movieTitle')
-var duration = document.querySelector('#duration')
-var movieInfo = document.querySelector('#movieInfo')
+var randomBtnEL = document.querySelector('#randomBtn')
+var mobRandomBtnEL = document.querySelector('#mobRandomBtn')
+var parentGifEL = document.querySelector('#parentGif')
+var posterEL = document.querySelector('#poster')
+var movieTitleEL = document.querySelector('#movieTitle')
+var movieInfoEL = document.querySelector('#movieInfo')
 var reviewsEL = document.querySelector('#reviews')
-var moreInfo = document.querySelector('#moreInfoParent')
+var moreInfoEL = document.querySelector('#moreInfoParent')
+var prevSearchEL = document.querySelector('#prevSearch')
 var omdbKey = 'trilogy'
 var giphKey = 'nw35KvBZSmb4OKNw51Qur35t2fh1nqob'
-var imdbKey = 'k_brnh9rmg'
+var imdbKey = 'k_s2t87b78'
 var movName = ''
+var currentSearch = []
+
+function init() {
+  randomMovie();
+  displayPrevSearches();
+}
+
 
 function randomMovie() {
   imdbCall();
@@ -41,7 +48,7 @@ function giphyCall() {
         gifResult = data.data[random].images.fixed_height.url;
         html += makeGif(gifResult)
       }
-      parentGif.innerHTML = html
+      parentGifEL.innerHTML = html
       i++
     })
 };
@@ -53,12 +60,17 @@ function omdbCall() {
   })
     .then((data) => {
       var html = ''
-      movieTitle.textContent = `${data.Title} ${data.Runtime}`
-      poster.setAttribute('src', data.Poster)
+      movieTitleEL.textContent = `${data.Title} ${data.Runtime}`
+      posterEL.setAttribute('src', data.Poster)
       reviews = gatherReviews(data);
       reviewsEL.innerHTML = makeReviews(reviews)
-      moreInfo.innerHTML = makeMoreInfo(data.Writer, data.Language, data.Country, data.DVD, data.BoxOffice)
-      movieInfo.innerHTML = makeMovieInfo(data.Director, data.Actors, data.Genre, data.Rated, data.Released, data.Awards, data.Plot)
+      moreInfoEL.innerHTML = makeMoreInfo(data.Writer, data.Language, data.Country, data.DVD, data.BoxOffice)
+      movieInfoEL.innerHTML = makemovieInfoEL(data.Director, data.Actors, data.Genre, data.Rated, data.Released, data.Awards, data.Plot)
+    })
+    .catch((err) => {
+      movName = 'spider-man'
+      omdbCall();
+      giphyCall();
     })
 };
 
@@ -82,20 +94,21 @@ function makeGif(data) {
 function makeReviews(data) {
   html = ''
   for (var i = 0; i < data.length; i++) {
-    html += `<h5 id='moreInfo'>${data[i].Rating} ${data[i].Source}</h5>`
+    html += `<h5 id='moreInfo'>${data[i].Score} ${data[i].Source}</h5>`
   }
   return html
 }
 
 function gatherReviews(data) {
-  reviewData = [
-    {
-      Source: '',
-      Score: ''
-    }
-  ]
+  reviewData = []
+
   for (var i = 0; i < data.Ratings.length; i++) {
-    reviewData[i] = { Source: data.Ratings[i].Source, Rating: data.Ratings[i].Value };
+    reviewDataNew =
+      {
+        'Source': data.Ratings[i].Source,
+        'Score': data.Ratings[i].Value
+      }
+    reviewData.push(reviewDataNew);
   }
   return reviewData
 }
@@ -108,14 +121,14 @@ function makeMoreInfo(writer, language, country, dvd, boxOffice) {
   <h5>Boxoffice: ${boxOffice}</h5>`
 }
 
-function makeMovieInfo(director, actors, genre, rated, released, awards, plot) {
-  return `<h5>Directed by: ${director}</h5>
+function makemovieInfoEL(director, actors, genre, rated, released, awards, plot) {
+  return `<h4 id='moreInfo'>${plot}</h4>
+  <h5>Director: ${director}</h5>
   <h5>Actors: ${actors}</h5>
-  <h5>Genre :${genre}</h5>
-  <h5>Rated: ${rated}</h5>
+  <h5>Genre: ${genre}</h5>
+  <h5>Rating: ${rated}</h5>
   <h5>Released: ${released}</h5>
-  <h5 id='moreInfo'>${awards}</h5>
-  <h5 id='moreInfo'>${plot}</h5>`
+  <h5 id='moreInfo'>${awards}</h5>`
 };
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -125,12 +138,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
 searchBtnEL.addEventListener('click', input => {
   movName = searchEL.value
-  handleSearch()
+  saveSearch(movName);
+  handleSearch();
 });
 
 mobSearchBtnEL.addEventListener('click', input => {
   movName = mobSearchEL.value
-  handleSearch()
+  saveSearch(movName);
+  handleSearch();
 });
 
 randomBtnEL.addEventListener('click', input => {
@@ -141,4 +156,20 @@ mobRandomBtnEL.addEventListener('click', input => {
   randomMovie();
 });
 
-/* randomMovie() */
+function displayPrevSearches() {
+  var savedSearches = JSON.parse(localStorage.getItem('title'))
+  for (var i = 0; i < savedSearches.length; i++) {
+    prevSearchEL.innerHTML += `<option value="${savedSearches[i].Title}"></option>`
+  }
+}
+
+function saveSearch(data) {
+  var currentSearchNew = 
+    {
+      'Title': data
+    }
+  currentSearch.push(currentSearchNew)
+  localStorage.setItem('title', JSON.stringify(currentSearch))
+}
+
+init();

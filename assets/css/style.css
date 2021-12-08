@@ -1,3 +1,9 @@
+html {
+    padding: 0;
+    border: 0;
+    box-sizing: border-box;
+}
+
 nav {
     margin-bottom: 45px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
@@ -24,7 +30,11 @@ input#search {
 }
 
 body {
+    display: flex;
     background-color: white;
+    min-height: 100vh;
+    justify-content: space-between;
+    flex-direction: column;
 }
 
 aside {
@@ -63,6 +73,7 @@ aside {
 #randomBtn:hover {
     transform: rotate(360deg);
     transform-origin: center;
+    cursor: pointer;
 }
 
 #searchBtn {
@@ -74,6 +85,12 @@ aside {
     background-color: transparent;
     color: white;
     border: none;
+}
+
+#searchBtn:hover,
+#mobSearchBtn,
+#mobRandomBtn {
+    cursor: pointer;
 }
 
 .moreInfoParent {
@@ -92,25 +109,26 @@ aside {
 
 footer {
     background-color: white;
-    bottom: 0;
-    height: 50px;
-    margin-top: 5px;
+    padding: .6rem;
     text-align: center;
     width: 100%;
     font-size: 20px;
+    line-height: 1px;
+    justify-self: flex-end;
 }
 
 @media screen and (max-width: 992px) {
     #parentGif {
-        transform: scale(.7)
+        transform: scale(.7);
     }
 }
 
 ;
 @media screen and (max-width: 768px) {
     #parentGif {
-        transform: scale(.5)
+        transform: scale(.5);
     }
+
 }
 
 ;
